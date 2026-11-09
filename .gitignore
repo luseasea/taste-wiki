@@ -1,0 +1,12 @@
+# 本地编辑器设置、临时文件和凭证不进入共享仓库。
+.DS_Store
+Thumbs.db
+.obsidian/
+.vscode/
+*.tmp
+*.bak
+*.log
+.env
+.env.*
+!.env.example
+node_modules/
