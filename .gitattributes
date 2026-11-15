@@ -1,3 +1,4 @@
 # 文档统一使用 LF；原始资料保留字节，保证来源指纹可复核。
 * text=auto eol=lf
 sources/原始资料/** -text
+sources/*/taste-ai-classification-eval-1.1.json -text !eol

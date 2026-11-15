@@ -1,0 +1,3736 @@
+{
+  "version": "1.1-product",
+  "title": "Taste AI 分类评测集（产品交付版）",
+  "categories": [
+    "美食",
+    "玩乐",
+    "好物",
+    "其他"
+  ],
+  "instructions": {
+    "modes": {
+      "name": [
+        "name"
+      ],
+      "full": [
+        "name",
+        "description",
+        "image_url"
+      ]
+    },
+    "model_input": "仅使用 input 中对应模式的字段。source_category、标签、理由和来源编号供离线审阅与计分。",
+    "statuses": {
+      "approved": "已完成本轮产品判定，可按对应模式计分",
+      "needs_image_review": "原图未核对，Full 暂不计分，保留文字初标仅供追溯",
+      "needs_context_review": "当前输入不足以建立可靠标准答案，暂不计分",
+      "duplicate_input": "相同名称的可计分样本已计一次"
+    },
+    "scoring": "按 evaluation 中列明的组独立报告。仅计对应模式为 approved 的样本，预测命中任一可接受标签即算对；响应失败或无有效分类计为未命中。分母以固定样本编号为准。",
+    "sampling": "从 651 条原始记录人工抽选 120 条，样本分布不代表线上分布。旧分类仅供追溯。同批完全相同的名称在 Name 模式最多计一次。",
+    "synthetic": "8 组文字对照，每组含 1 条仅名称和 2 条新增描述。无图片，独立报告。",
+    "rules": [
+      "保留美食、玩乐、好物、其他四类。有效描述明确推荐对象或使用目的时，按其指向分类；只是补充原对象配套时，仍按原对象分类。星巴克门店提及 Wi-Fi 和插座仍是餐饮场所；条目主要提供商场停车服务信息时归其他。",
+      "公开场所名可能指游逛、参观等体验，也可能指设施或服务，两者确实都合理时接受玩乐和其他。以看展、导览、参观为目的的图书馆条目归玩乐；以自习、借阅、集合或使用公共设施为目的的归其他。只说是个好去处时保留合理的双答案。",
+      "仅名称信息不足且歧义超出玩乐和其他时，由模型在产品中决定；评测排除无法建立可靠答案的输入。"
+    ]
+  },
+  "real_samples": [
+    {
+      "sample_id": "real-16",
+      "source_id": 16,
+      "input": {
+        "name": "老马东北菜",
+        "description": "东北菜，人均30",
+        "image_url": "https://introduce.mcdd.top/Fk1BG90pfJpNad1FAU9dP5-KORbF"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-30",
+      "source_id": 30,
+      "input": {
+        "name": "湘寻辣访",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-32",
+      "source_id": 32,
+      "input": {
+        "name": "KFC",
+        "description": "优化一下",
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-33",
+      "source_id": 33,
+      "input": {
+        "name": "药膳麻辣烫",
+        "description": "哈哈哈哈哈哈",
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-66",
+      "source_id": 66,
+      "input": {
+        "name": "热干面🍜",
+        "description": "没有小手的热干面",
+        "image_url": "https://introduce.mcdd.top/ForU6TVPUJ8RprC6B9YmYdaBn60x"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-67",
+      "source_id": 67,
+      "input": {
+        "name": "热带风味冰红茶",
+        "description": "真神无须多言",
+        "image_url": "https://introduce.mcdd.top/Fri2SbUVIEaGDh92rCppUeZPyTdV"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-69",
+      "source_id": 69,
+      "input": {
+        "name": "超值天然饮用水",
+        "description": "0.6r的超值性价比，质朴无须多言",
+        "image_url": "https://introduce.mcdd.top/FuJF4O6UIAUf6GTxImzNMHsicSwJ"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-70",
+      "source_id": 70,
+      "input": {
+        "name": "瑞幸·小黄油拿铁",
+        "description": "本人乳糖不耐，早上喝咖啡也容易拉肚子，但热拿铁万岁",
+        "image_url": "https://introduce.mcdd.top/Fshlb7lahaqV6pf4hF98fWzxJWCT"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-71",
+      "source_id": 71,
+      "input": {
+        "name": "库迪· 潘帕斯蓝拿铁",
+        "description": "冰的很好，但库迪倒闭了",
+        "image_url": "https://introduce.mcdd.top/Fr5NrJvEr8c_yH6C-xYhFx7LrE8k"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-72",
+      "source_id": 72,
+      "input": {
+        "name": "葡萄糖补水液",
+        "description": "味道一般般，但能快速补给大脑消耗的葡萄糖，助我考试顺利过",
+        "image_url": "https://introduce.mcdd.top/FnEDj0fSGLYNWa6hYuUlBCVNh0sP"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-73",
+      "source_id": 73,
+      "input": {
+        "name": "罗森果汁",
+        "description": "价格不友好，味道太甜",
+        "image_url": "https://introduce.mcdd.top/FljXzReUmklpNBC_P9Ie77urpTS2"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-74",
+      "source_id": 74,
+      "input": {
+        "name": "茉莉奶白·针王系列",
+        "description": "饮料一般，但可以在店里背书复习",
+        "image_url": "https://introduce.mcdd.top/Ftt3n5NJc95Nt7iWUge1E7e1gmLI"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称无法可靠区分具体对象，或需要品牌、作品形态等额外信息"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "名称与文字都指向饮料，复习是附带的使用场景。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-75",
+      "source_id": 75,
+      "input": {
+        "name": "冰吸生椰拿铁",
+        "description": "不好喝，像喉咙浸入了风油精",
+        "image_url": "https://introduce.mcdd.top/Fmr92T-xyrjXtFG_FrzKcWYaatYZ"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-78",
+      "source_id": 78,
+      "input": {
+        "name": "国企食堂",
+        "description": "大望路国企食堂，味道不错，很健康，而且很便宜，两荤两素基本 25 以内，性价比很高了。因为味道确实健康，就是那种学校食堂的感觉",
+        "image_url": "https://introduce.mcdd.top/FkdqiqVifEso2bSBNjgaJ-Ui0flv"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-85",
+      "source_id": 85,
+      "input": {
+        "name": "麦当劳",
+        "description": null,
+        "image_url": "https://introduce.mcdd.top/FkeLH1a0znocme2ehx7YtvNSLScV"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-116",
+      "source_id": 116,
+      "input": {
+        "name": "一点点抹茶无糖",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-118",
+      "source_id": 118,
+      "input": {
+        "name": "喜茶三倍厚抹",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-120",
+      "source_id": 120,
+      "input": {
+        "name": "瑞幸小黄油美式",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-121",
+      "source_id": 121,
+      "input": {
+        "name": "白开水",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-122",
+      "source_id": 122,
+      "input": {
+        "name": "瑞幸生椰三重奏",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-123",
+      "source_id": 123,
+      "input": {
+        "name": "一点点冰淇淋红茶",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-125",
+      "source_id": 125,
+      "input": {
+        "name": "蜜雪柠檬水",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-126",
+      "source_id": 126,
+      "input": {
+        "name": "古茗布蕾脆脆奶芙",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-130",
+      "source_id": 130,
+      "input": {
+        "name": "茉酸奶牛油果酸奶奶昔",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-139",
+      "source_id": 139,
+      "input": {
+        "name": "可乐",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-141",
+      "source_id": 141,
+      "input": {
+        "name": "冰红茶",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向餐饮店、菜品或饮料"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向餐饮店、菜品或饮料"
+      }
+    },
+    {
+      "sample_id": "real-333",
+      "source_id": 333,
+      "input": {
+        "name": "平板支架",
+        "description": "角度调节不是很好 老是需要转 也很麻烦",
+        "image_url": "https://introduce.mcdd.top/FmdkkaVf2bB-jLiiUpeMw10my5XF"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-345",
+      "source_id": 345,
+      "input": {
+        "name": "风扇",
+        "description": "挺不错的 但是遥控器还是不怎么好用 所以直接闲置了 虽然有灯光模式 但也没咋用 倒是清洗比较方便 挺好拆的",
+        "image_url": "https://introduce.mcdd.top/FggutCgjsyQ3pVvHLgdFNXoExB_u"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-347",
+      "source_id": 347,
+      "input": {
+        "name": "充电器电脑",
+        "description": "很不错 不用天天拆线 少背一块砖 就是线有点短",
+        "image_url": "https://introduce.mcdd.top/Ft-zQkd7JkBvlEhiSw0kFouu936s"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-358",
+      "source_id": 358,
+      "input": {
+        "name": "挂钩",
+        "description": "挺不错的 还可以移动 就是墙上不允许 还是有点限制的",
+        "image_url": "https://introduce.mcdd.top/FkPqcVxawFtchVUPS24cAkHTwG-G"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-362",
+      "source_id": 362,
+      "input": {
+        "name": "灯",
+        "description": "之前是有遥控 还有可以续航 但遥控我还是不太喜欢用 续航虽然说可以续航 但后面会越来越暗 还不如一直冲着呢 还不如这种直接一直充的 还有按钮可以开关",
+        "image_url": "https://introduce.mcdd.top/FolhF7QM5OmmxTCFz3Gtgo79SFtq"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-366",
+      "source_id": 366,
+      "input": {
+        "name": "灯",
+        "description": "我上面说的那个灯就是这个 它虽然可以看时间 但真的真的很鸡肋 根本用不上 因为我不太喜欢用了他的那个遥控 所以说我都是手动直接在登上点开关 所以每次开的时候还会误触到改时间的那个特别特别的麻烦 为了它",
+        "image_url": "https://introduce.mcdd.top/FvJ6TWMWjlNJdOQ8UFp-dip72FP4"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "duplicate_input",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-367",
+      "source_id": 367,
+      "input": {
+        "name": "置物架",
+        "description": "这样就非常非常的nice篮子里可以装一些小东西 然后也可以装一些上床需要用下床也会去用到的东西 方便拿 不用老是上去下来 而且他上面还有可拆的挂钩，可以用来挂衣服，挂钩也可以换个地方放 移动特别方便",
+        "image_url": "https://introduce.mcdd.top/Fpqenb8L9VJDoMWTo8XV32vaRZnJ"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-373",
+      "source_id": 373,
+      "input": {
+        "name": "子母扣",
+        "description": "这种挂钩我真的是对他很无奈了 他粘在墙上特别特别厉害 但是他粘插板很鸡肋了 应该是插板后面比较平滑 他老是掉 我后面还用双面胶给他粘 但他也是掉 还不如买那种玻璃胶",
+        "image_url": "https://introduce.mcdd.top/Fv1pU09J3QbBwALRRrio4amYh_HH"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-382",
+      "source_id": 382,
+      "input": {
+        "name": "被子床单固定器",
+        "description": "这个真的很容易误伤到自己 他这个针头很锋利，我不是被划一下就会被戳一下 固定的被子的床单 给我弄得像凶案现场 我手指都包了两个了 也非常的费劲 每次弄得给我出来满身的汗 澡都白洗了 \n但还是挺牢的",
+        "image_url": "https://introduce.mcdd.top/Fq2p5r2bafeUDmqDMEy8wsw57T9u"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-409",
+      "source_id": 409,
+      "input": {
+        "name": "电动车",
+        "description": "夯中之夯，大学最具性价比的好物\n一车传三代，人走车还在\n毕业了也要出掉",
+        "image_url": "https://introduce.mcdd.top/Fj6ZQyGodXXlHXhQ6sh1CzEuBMLL"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-410",
+      "source_id": 410,
+      "input": {
+        "name": "吹风机",
+        "description": "学哥学姐传下来的吹风机，绝对符合学校要求",
+        "image_url": "https://introduce.mcdd.top/FjMx4PEZe-ESkpTEfnWf4HDZS39J"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-411",
+      "source_id": 411,
+      "input": {
+        "name": "电锅",
+        "description": "一般不会太难用，而且一套下来价格对钱包很友好",
+        "image_url": "https://introduce.mcdd.top/FmgQ1NiqemAsk41GbcoYRRkLEJu8"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-413",
+      "source_id": 413,
+      "input": {
+        "name": "塑料挂钩",
+        "description": "平价刺客，挂不了一点重物",
+        "image_url": "https://introduce.mcdd.top/FgS5YedQz_G2jmjP1Ya97sgA1-1s"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-415",
+      "source_id": 415,
+      "input": {
+        "name": "小推车",
+        "description": "看质量，收纳起来非常的爽啊\n但有些二手推车轮子很差、也不稳，还不如不用",
+        "image_url": "https://introduce.mcdd.top/FrTaJyUxJqXv33Y3x32EoX4SDBsK"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-416",
+      "source_id": 416,
+      "input": {
+        "name": "床上桌",
+        "description": "唔，个人暴论\n上床下桌的寝室不需要床上桌\n如果想看剧，不如买支架\n如果想放东西，不如床边挂钩",
+        "image_url": "https://introduce.mcdd.top/FpzMUmSbCgVeRU0ClSN4MfZ3WkTU"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-418",
+      "source_id": 418,
+      "input": {
+        "name": "收音机",
+        "description": "如果没买的话，在学校收二手很划算\n但一般大家都有，所以其实不太需要二手的",
+        "image_url": "https://introduce.mcdd.top/Fh49xyYiBBoeXuK0F0YN735lh_Tv"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-458",
+      "source_id": 458,
+      "input": {
+        "name": "毛毡板",
+        "description": "配小夹子或小钉子，可以把各种东西挂上墙，海报、专辑而且毛毡板出乎意料的稳，小卡、吧唧、日程表、小挂件，每天醒来看到这些就很幸福",
+        "image_url": "https://introduce.mcdd.top/FkBtFc4BOZUOROhaU9I-y-Dip88D"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-459",
+      "source_id": 459,
+      "input": {
+        "name": "洞洞板",
+        "description": "适合挂一些立体的东西，手柄耳机梳子啥的，比较重的都能放，展示效果也很好，坏处是比较占位置",
+        "image_url": "https://introduce.mcdd.top/Fh0yJBZCRiM9LCmqvWGYV0bESPYd"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-460",
+      "source_id": 460,
+      "input": {
+        "name": "横条挂钩",
+        "description": "如果你喜欢各种娃娃，这个收纳/展示方式很妙啊，是我测试过最便宜、最方便、最大化利用空间拿取、最方便欣赏的收纳方式了，而且这个很便宜，感觉挂别的也可以，间距宽度长度可以感觉需求调整",
+        "image_url": "https://introduce.mcdd.top/Ft1qje0wZ_drqytB3b8k_aPY2QTy"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-462",
+      "source_id": 462,
+      "input": {
+        "name": "挂式布面收纳袋",
+        "description": "看这个图上空空的就知道，这玩意不好用，占地方，全身上下就靠一个钩子，基本不能放啥重物，放了也是会掉出来，不是很美观，不推荐",
+        "image_url": "https://introduce.mcdd.top/FojFGf6ai6W43kbwmoJKacL1LAW0"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-463",
+      "source_id": 463,
+      "input": {
+        "name": "外延置物架",
+        "description": "如果床头床尾有多余空间的可以用这个架子，很稳固，床上可以放东西，在下面可以挂衣服，挺好的",
+        "image_url": "https://introduce.mcdd.top/FsqmhVYKBXII_1dbz2OQlST1HL9v"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-464",
+      "source_id": 464,
+      "input": {
+        "name": "宜家床上桌",
+        "description": "我用过最轻便最好收纳的床上桌了，薄薄的一片，唯一缺点是它有凹槽，不能长期在上面写字或干活，比那种散发甲醇的厚重木质床上桌的好太多",
+        "image_url": "https://introduce.mcdd.top/FtZqTq0vi7aOUgRF5QtWVEqUA4-E"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-465",
+      "source_id": 465,
+      "input": {
+        "name": "防撞条",
+        "description": "这个小东西极大改善生活质量，\n首先这个厚度可以防止你的手机啥的小物件从床缝掉下去\n其次，碰到墙也不会冰冰凉凉的，软软的很舒服",
+        "image_url": "https://introduce.mcdd.top/FhzzRVM-oq4MQdx4teUBuMhu4IIn"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-466",
+      "source_id": 466,
+      "input": {
+        "name": "宜家可调节台灯",
+        "description": "本来是放在桌上的灯，但我寝室桌子太小，后来放到床上了，依旧好用，只要有个平面就能夹住，然后这个灯可以随意调节角度方向，配灯泡要是配智能的还能调光，不占位置又很好用",
+        "image_url": "https://introduce.mcdd.top/FkV2FBSeyZkwim-oxMI815-Tx_UA"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-722",
+      "source_id": 722,
+      "input": {
+        "name": "阿蒂仙 冥府之路",
+        "description": null,
+        "image_url": "https://introduce.mcdd.top/Fsmp5lVSK8mXH_U0BGm9YQfPucgw"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称无法可靠区分具体对象，或需要品牌、作品形态等额外信息"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-724",
+      "source_id": 724,
+      "input": {
+        "name": "芦丹氏 午时姜茶",
+        "description": null,
+        "image_url": "https://introduce.mcdd.top/FuCzCYRcxhLYbqr_ZDnUDz4SFraO"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称无法可靠区分具体对象，或需要品牌、作品形态等额外信息"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-750",
+      "source_id": 750,
+      "input": {
+        "name": "手卷钢琴（已具齐）",
+        "description": "88键，比较齐全",
+        "image_url": "https://introduce.mcdd.top/FlG9pN1KJewkMZ9AYoGNNnT-jMXH"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "名称明确或可辨识为实体用品、设备或香水"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确或可辨识为实体用品、设备或香水。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-51",
+      "source_id": 51,
+      "input": {
+        "name": "明十三陵明十三陵明十",
+        "description": "说实话明十三陵地理位置偏僻，往返折腾很费时间，门票收费也偏高。整体看点比较单一，看多了陵墓建筑容易审美疲劳。就是典型网红打卡景点，没去过总惦记，真正逛完就觉得仅此而已，去过一次就够，基本不会二刷。",
+        "image_url": "https://introduce.mcdd.top/FiJsJcHI0guX240_QHI8eO9kzUmy"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-87",
+      "source_id": 87,
+      "input": {
+        "name": "星聚会KTV",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点"
+      }
+    },
+    {
+      "sample_id": "real-89",
+      "source_id": 89,
+      "input": {
+        "name": "欢乐迪",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点"
+      }
+    },
+    {
+      "sample_id": "real-108",
+      "source_id": 108,
+      "input": {
+        "name": "清江画廊",
+        "description": "八百里清江美如画，三百里画廊在长阳。",
+        "image_url": "https://introduce.mcdd.top/FtQF0SvNlOUsdO-HoCvlNLXaRrPF"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-110",
+      "source_id": 110,
+      "input": {
+        "name": "武汉落雁岛",
+        "description": "偷得浮生半日闲",
+        "image_url": "https://introduce.mcdd.top/FgHAyNbrRc3uZKv1piyw5XBxfxfe"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-111",
+      "source_id": 111,
+      "input": {
+        "name": "北京景山公园",
+        "description": "最划算的公园",
+        "image_url": "https://introduce.mcdd.top/FlBXfuSJCX-C1sdlWASndObjAmfR"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-269",
+      "source_id": 269,
+      "input": {
+        "name": "一起看电影",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "一起看电影指线下或共同观影活动"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "一起看电影指线下或共同观影活动"
+      }
+    },
+    {
+      "sample_id": "real-287",
+      "source_id": 287,
+      "input": {
+        "name": "天安门",
+        "description": "来了必去，但是排队真的很长",
+        "image_url": "https://introduce.mcdd.top/Fsy1bLlZ8I9Bd5pZt0n6wJcfG-JH"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-291",
+      "source_id": 291,
+      "input": {
+        "name": "南锣鼓巷",
+        "description": "啥也不是",
+        "image_url": "https://introduce.mcdd.top/FvUtNnq-fPCk650X7QEz8fznvLQo"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-292",
+      "source_id": 292,
+      "input": {
+        "name": "什刹海",
+        "description": "无法评价，小池塘？",
+        "image_url": "https://introduce.mcdd.top/FmheCwhfB672UQ_4vknCQyG0PoI7"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-293",
+      "source_id": 293,
+      "input": {
+        "name": "韩美林艺术馆",
+        "description": "清幽，是看得懂的艺术馆",
+        "image_url": "https://introduce.mcdd.top/FvvcNNp1GvX31r6uMg6kAiya8cao"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-294",
+      "source_id": 294,
+      "input": {
+        "name": "天坛",
+        "description": "🫣🫣我感觉，只有这个祈年殿值得看（我文化低，别骂我）",
+        "image_url": "https://introduce.mcdd.top/Fq9NCucVMKGXezGMFNeKmbgsgTkm"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-428",
+      "source_id": 428,
+      "input": {
+        "name": "公馆商务KTV",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点"
+      }
+    },
+    {
+      "sample_id": "real-435",
+      "source_id": 435,
+      "input": {
+        "name": "魅KTV",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点"
+      }
+    },
+    {
+      "sample_id": "real-498",
+      "source_id": 498,
+      "input": {
+        "name": "迪唛智慧自助KTV",
+        "description": "团购杠杠的",
+        "image_url": "https://introduce.mcdd.top/FtDmHFJAgEjB-EdSz4g6emEKKYiM"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-499",
+      "source_id": 499,
+      "input": {
+        "name": "新概念KTV",
+        "description": "团购价最低",
+        "image_url": "https://introduce.mcdd.top/FvOBDfQCk1N0DJL2T9b2fiSjZV9N"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-519",
+      "source_id": 519,
+      "input": {
+        "name": "嗨十派对KTV",
+        "description": "还可以，有点小贵，但是服务不一样",
+        "image_url": "https://introduce.mcdd.top/FodZR7T7jI2CvpSvvZdB-rtE8v9_"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-521",
+      "source_id": 521,
+      "input": {
+        "name": "好声音氧巴KTV",
+        "description": "嗯嗯，非常的OK哈",
+        "image_url": "https://introduce.mcdd.top/Fn0A33wmyT87cYGjGi7HEHlmo8wo"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-524",
+      "source_id": 524,
+      "input": {
+        "name": "岳麓山",
+        "description": "推荐晚上去\n坐缆车，有好看的风景",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称明确指向娱乐活动、娱乐场所或景点"
+      }
+    },
+    {
+      "sample_id": "real-525",
+      "source_id": 525,
+      "input": {
+        "name": "开佛寺",
+        "description": "风景好",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称明确指向娱乐活动、娱乐场所或景点"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "描述不足以确认具体场所或活动用途"
+      }
+    },
+    {
+      "sample_id": "real-61",
+      "source_id": 61,
+      "input": {
+        "name": "现代汉语·上",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能是课程，也可能是实体教材，当前名称无法区分"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "无补充信息可确定是课程还是实体教材"
+      }
+    },
+    {
+      "sample_id": "real-62",
+      "source_id": 62,
+      "input": {
+        "name": "现代汉语·下",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能是课程，也可能是实体教材，当前名称无法区分"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "无补充信息可确定是课程还是实体教材"
+      }
+    },
+    {
+      "sample_id": "real-63",
+      "source_id": 63,
+      "input": {
+        "name": "文学概论",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能是课程，也可能是实体教材，当前名称无法区分"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "无补充信息可确定是课程还是实体教材"
+      }
+    },
+    {
+      "sample_id": "real-65",
+      "source_id": 65,
+      "input": {
+        "name": "古代汉语·一",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能是课程，也可能是实体教材，当前名称无法区分"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "无补充信息可确定是课程还是实体教材"
+      }
+    },
+    {
+      "sample_id": "real-100",
+      "source_id": 100,
+      "input": {
+        "name": "恋与制作人",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-101",
+      "source_id": 101,
+      "input": {
+        "name": "未定事件簿",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-102",
+      "source_id": 102,
+      "input": {
+        "name": "时空中的绘旅人",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-103",
+      "source_id": 103,
+      "input": {
+        "name": "世界之外",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-104",
+      "source_id": 104,
+      "input": {
+        "name": "恋与深空",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-105",
+      "source_id": 105,
+      "input": {
+        "name": "光与夜之恋",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-106",
+      "source_id": 106,
+      "input": {
+        "name": "遇见逆水寒",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-107",
+      "source_id": 107,
+      "input": {
+        "name": "最后的厂牌",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-112",
+      "source_id": 112,
+      "input": {
+        "name": "斗罗大陆1",
+        "description": "那还说啥了 当之无愧国漫第一",
+        "image_url": "https://introduce.mcdd.top/Fn-prh_3fYMDdn0HuJO943y2_Y8c"
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-113",
+      "source_id": 113,
+      "input": {
+        "name": "斗罗大陆2",
+        "description": "呃 如果你看的事漫画版 那我只能说 夯爆了！！！ 所以玄机你还我舞桐哈",
+        "image_url": "https://introduce.mcdd.top/Fku5f-l8-xaZZrd5HHCYW6c7kw5J"
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-115",
+      "source_id": 115,
+      "input": {
+        "name": "沧元图",
+        "description": "是群像 我们有救了！ 照片放的是配角哦 可见其质量",
+        "image_url": "https://introduce.mcdd.top/Fm9MvmkqPOQj9thlXEQVRz0gvgN4"
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-117",
+      "source_id": 117,
+      "input": {
+        "name": "神印王座",
+        "description": "其实是夯 可惜最后结局的十集没有好好做 害…",
+        "image_url": "https://introduce.mcdd.top/Fkt9szp7V3NvcKBIKogvI4kKE1pR"
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-119",
+      "source_id": 119,
+      "input": {
+        "name": "剑来",
+        "description": "“我叫阿良 丧尽天良的良”\n\n第一季立意高看不懂 好在第二季给完美解释了 棒棒的",
+        "image_url": "https://introduce.mcdd.top/FgKso1hmwnElafvC1prGJgLlAZGg"
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-127",
+      "source_id": 127,
+      "input": {
+        "name": "第一序列",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称无法可靠区分具体对象，或需要品牌、作品形态等额外信息"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "没有描述或图片，仍无法区分实体出版物和数字作品"
+      }
+    },
+    {
+      "sample_id": "real-132",
+      "source_id": 132,
+      "input": {
+        "name": "恶魔法则",
+        "description": "冷圈 但是建模剧情什么的 一点也不会输",
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-140",
+      "source_id": 140,
+      "input": {
+        "name": "吞噬星空",
+        "description": "宇宙恶霸来了",
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-145",
+      "source_id": 145,
+      "input": {
+        "name": "斩神",
+        "description": "今年6.25第二季 现在入坑的话那真是太好啦！",
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-162",
+      "source_id": 162,
+      "input": {
+        "name": "遮天",
+        "description": "轻喜剧 普普通通 最好看的部分是解说大帝开场二十几秒的解说☺️",
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-164",
+      "source_id": 164,
+      "input": {
+        "name": "仙逆",
+        "description": "王麻子杀生记 好看的 就是杀到后面剧情太单一了",
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-173",
+      "source_id": 173,
+      "input": {
+        "name": "牧神记",
+        "description": "bilibili出品 设定离奇怪诞风 就是更新太慢…🙂‍↕️我要给你降级",
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-188",
+      "source_id": 188,
+      "input": {
+        "name": "第一序列",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称无法可靠区分具体对象，或需要品牌、作品形态等额外信息"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "没有描述或图片，仍无法区分实体出版物和数字作品"
+      }
+    },
+    {
+      "sample_id": "real-248",
+      "source_id": 248,
+      "input": {
+        "name": "和我碎碎念的时候",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-259",
+      "source_id": 259,
+      "input": {
+        "name": "需要我的时候",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-265",
+      "source_id": 265,
+      "input": {
+        "name": "能听我碎碎念的时候",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-266",
+      "source_id": 266,
+      "input": {
+        "name": "喊我宝宝的时候",
+        "description": null,
+        "image_url": null
+      },
+      "source_category": "其他",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向数字作品、游戏、课程或人际互动"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "按名称及已有描述判断：名称指向数字作品、游戏、课程或人际互动"
+      }
+    },
+    {
+      "sample_id": "real-29",
+      "source_id": 29,
+      "input": {
+        "name": "特斯拉",
+        "description": null,
+        "image_url": "https://introduce.mcdd.top/FmsmxQrQy0e6uT7N8iXFN5tCcfCW"
+      },
+      "source_category": "美食",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "品牌名无法区分车辆、门店或相关体验"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_image_review",
+        "reason": "无描述，需看图确认推荐对象。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-40",
+      "source_id": 40,
+      "input": {
+        "name": "特斯拉",
+        "description": null,
+        "image_url": "https://introduce.mcdd.top/FmsmxQrQy0e6uT7N8iXFN5tCcfCW"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "同名条目在名称模式下使用相同判定"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_image_review",
+        "reason": "无描述，需看图确认推荐对象。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-388",
+      "source_id": 388,
+      "input": {
+        "name": "Forever",
+        "description": "夯爆了，弹簧舞池氛围感拉满",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "通用英文名，无法识别具体对象"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "弹簧舞池指向线下娱乐"
+      }
+    },
+    {
+      "sample_id": "real-389",
+      "source_id": 389,
+      "input": {
+        "name": "米奈",
+        "description": "小厅还行吧，大厅很一般",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称未表明具体对象"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "大小厅仍不足以确认场所用途"
+      }
+    },
+    {
+      "sample_id": "real-391",
+      "source_id": 391,
+      "input": {
+        "name": "十三狼",
+        "description": "拉完了，音响太差了，人也少，1点多就没人了",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称未表明具体对象"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "描述不足以确认具体场所或活动用途"
+      }
+    },
+    {
+      "sample_id": "real-392",
+      "source_id": 392,
+      "input": {
+        "name": "Esmi",
+        "description": "可以玩到散场，人也挺多的",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称未表明具体对象"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "描述不足以确认具体场所或活动用途"
+      }
+    },
+    {
+      "sample_id": "real-393",
+      "source_id": 393,
+      "input": {
+        "name": "威海404",
+        "description": "拉完了，12点多人就不多了",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能是店名、地点或其他对象"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "只有凌晨人流信息，尚不足以确认具体用途"
+      }
+    },
+    {
+      "sample_id": "real-503",
+      "source_id": 503,
+      "input": {
+        "name": "​​沐光屿纯女青旅",
+        "description": "位置在大智路地铁站附近，交通无敌。 装修精致，公区氛围感很好，最重要的是提供免费洗衣烘干，对独旅女生太友好了！",
+        "image_url": "https://introduce.mcdd.top/FksZYztIcKziyJylZoJ1Hk6E4qWW"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "青旅可指旅行住宿体验或一般住宿服务"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "描述聚焦住宿条件和洗烘服务，按住宿服务初标。原图尚未核对"
+      }
+    },
+    {
+      "sample_id": "real-505",
+      "source_id": 505,
+      "input": {
+        "name": "学校图书馆",
+        "description": "学校还是最好的去出，图书馆更是",
+        "image_url": "https://introduce.mcdd.top/FnMNxVWr_j1_IWTW12Jns3aTCTPg"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "仅有图书馆名称，可能推荐参观体验，也可能是自习等公共设施"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "描述只说是一个好去处，未明确参观或自习用途。原图尚未核对"
+      }
+    },
+    {
+      "sample_id": "real-508",
+      "source_id": 508,
+      "input": {
+        "name": "星巴克",
+        "description": "门店遍布武汉商圈、写字楼，随处能找到，WiFi稳定、插座充足",
+        "image_url": "https://introduce.mcdd.top/FpOKZvsK3ISv-3Sx6cKLZKw09iY6"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "星巴克名称通常指咖啡馆"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "needs_image_review",
+        "reason": "描述评价的是咖啡馆门店的配套，未指向另一个明确对象。原图尚未核对"
+      }
+    },
+    {
+      "sample_id": "real-510",
+      "source_id": 510,
+      "input": {
+        "name": "永旺梦乐城休息区",
+        "description": "免费、有座位、能充电、空调足，完美符合你“随地大小加班”的需求。",
+        "image_url": "https://introduce.mcdd.top/Fk5QwW0DN6kKo8ZwNUuTNmqVtfKg"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指商场休息设施"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "描述聚焦免费座位、充电和办公。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-516",
+      "source_id": 516,
+      "input": {
+        "name": "湖北省图书馆",
+        "description": "超大自习区、WiFi全覆盖、插座充足，自习室开到20:30，三镇实习生首选，环境安静适合长时间改方案、写报告",
+        "image_url": "https://introduce.mcdd.top/FoxDCfBMJYPpX6aVxn3Gh5WGLygh"
+      },
+      "source_category": "好物",
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "仅有图书馆名称，可能推荐参观体验，也可能是自习等公共设施"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "描述明确推荐自习、插座、WiFi 和开放条件，按自习设施初标。原图尚未核对"
+      }
+    },
+    {
+      "sample_id": "real-522",
+      "source_id": 522,
+      "input": {
+        "name": "五一广场",
+        "description": "很多好吃的好逛的",
+        "image_url": "https://introduce.mcdd.top/FobnA57-ZvHurItCXWxhnCoklbzm"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "广场可能是游逛目的地或单纯地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "needs_image_review",
+        "reason": "描述指向逛街体验，兼有餐饮。原图尚未核对，文字判断仅作初标"
+      }
+    },
+    {
+      "sample_id": "real-526",
+      "source_id": 526,
+      "input": {
+        "name": "湖南大学",
+        "description": "美食非常非常非常多",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "名称无法可靠区分具体对象，或需要品牌、作品形态等额外信息"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "只说学校美食多，没有明确是推荐高校、食堂还是一项校园体验"
+      }
+    },
+    {
+      "sample_id": "real-711",
+      "source_id": 711,
+      "input": {
+        "name": "武商梦时代",
+        "description": "会员每天免费停六小时",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "商业综合体可指游逛目的地或普通地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "推荐依据是停车优惠"
+      }
+    },
+    {
+      "sample_id": "real-713",
+      "source_id": 713,
+      "input": {
+        "name": "光谷步行街地下停车场",
+        "description": "一小时六块，上不封顶",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指停车设施"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "描述仅给出停车收费"
+      }
+    },
+    {
+      "sample_id": "real-718",
+      "source_id": 718,
+      "input": {
+        "name": "武昌万象城",
+        "description": "新注册会员免费停两个小时，正常停车 5 元一小时",
+        "image_url": null
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "商场可指游逛目的地或普通地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "描述仅给出停车优惠与收费"
+      }
+    },
+    {
+      "sample_id": "real-823",
+      "source_id": 823,
+      "input": {
+        "name": "孤独摇滚",
+        "description": null,
+        "image_url": "https://introduce.mcdd.top/FmWO3sdzzn9xrThGG4rDZwklXVMe"
+      },
+      "source_category": "玩乐",
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称指向动画作品，按数字内容初标"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "needs_image_review",
+        "reason": "文字指向动画作品，需结合原图确认。原图尚未核对，文字判断仅作初标"
+      }
+    }
+  ],
+  "synthetic_samples": [
+    {
+      "sample_id": "synthetic-01",
+      "input": {
+        "name": "合生汇",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "既可能是逛玩的目的地，也可能只是地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "既可能是逛玩的目的地，也可能只是地点"
+      }
+    },
+    {
+      "sample_id": "synthetic-02",
+      "input": {
+        "name": "合生汇",
+        "description": "周末带娃看展，再去室内乐园。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "既可能是逛玩的目的地，也可能只是地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "推荐线下娱乐体验"
+      }
+    },
+    {
+      "sample_id": "synthetic-03",
+      "input": {
+        "name": "合生汇",
+        "description": "地铁口出来在这里集合，定位很准。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "既可能是逛玩的目的地，也可能只是地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "推荐集合点"
+      }
+    },
+    {
+      "sample_id": "synthetic-04",
+      "input": {
+        "name": "万象城",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "商场名称可以指游逛体验或地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "商场名称可以指游逛体验或地点"
+      }
+    },
+    {
+      "sample_id": "synthetic-05",
+      "input": {
+        "name": "万象城",
+        "description": "负一层这家牛肉粉不错，汤底很浓。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "商场名称可以指游逛体验或地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "具体推荐牛肉粉"
+      }
+    },
+    {
+      "sample_id": "synthetic-06",
+      "input": {
+        "name": "万象城",
+        "description": "会员停车两小时免费，地下车位也好找。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "商场名称可以指游逛体验或地点"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "描述聚焦停车服务"
+      }
+    },
+    {
+      "sample_id": "synthetic-07",
+      "input": {
+        "name": "城市书房",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "既可能是参观地点，也可能是阅读设施"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "既可能是参观地点，也可能是阅读设施"
+      }
+    },
+    {
+      "sample_id": "synthetic-08",
+      "input": {
+        "name": "城市书房",
+        "description": "周日下午这里有建筑导览和小型展览。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "既可能是参观地点，也可能是阅读设施"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "推荐参加导览和看展"
+      }
+    },
+    {
+      "sample_id": "synthetic-09",
+      "input": {
+        "name": "城市书房",
+        "description": "自习桌有插座，来这里复习很安静。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐",
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "既可能是参观地点，也可能是阅读设施"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "推荐自习设施"
+      }
+    },
+    {
+      "sample_id": "synthetic-10",
+      "input": {
+        "name": "手作体验馆",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称通常指线下体验场所"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "名称通常指线下体验场所"
+      }
+    },
+    {
+      "sample_id": "synthetic-11",
+      "input": {
+        "name": "手作体验馆",
+        "description": "预约了一小时拉坯课，老师会带着做。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "duplicate_input",
+        "reason": "名称通常指线下体验场所"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "推荐陶艺活动"
+      }
+    },
+    {
+      "sample_id": "synthetic-12",
+      "input": {
+        "name": "手作体验馆",
+        "description": "只推荐柜台卖的那套木柄刻刀，可以带回家。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "duplicate_input",
+        "reason": "名称通常指线下体验场所"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "推荐实体工具"
+      }
+    },
+    {
+      "sample_id": "synthetic-13",
+      "input": {
+        "name": "寻梦环游记",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "片名通常指影片作品"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "片名通常指影片作品"
+      }
+    },
+    {
+      "sample_id": "synthetic-14",
+      "input": {
+        "name": "寻梦环游记",
+        "description": "片尾那首歌很好听，正版影片可以在平台看。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "片名通常指影片作品"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "推荐影片内容"
+      }
+    },
+    {
+      "sample_id": "synthetic-15",
+      "input": {
+        "name": "寻梦环游记",
+        "description": "周六在露天广场有这部片的放映活动。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "片名通常指影片作品"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "推荐线下观影活动"
+      }
+    },
+    {
+      "sample_id": "synthetic-16",
+      "input": {
+        "name": "星巴克",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称通常指咖啡馆"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "名称通常指咖啡馆"
+      }
+    },
+    {
+      "sample_id": "synthetic-17",
+      "input": {
+        "name": "星巴克",
+        "description": "这家门店的冷萃苦味轻，配甜点正好。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "duplicate_input",
+        "reason": "名称通常指咖啡馆"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "推荐饮品"
+      }
+    },
+    {
+      "sample_id": "synthetic-18",
+      "input": {
+        "name": "星巴克",
+        "description": "只推荐那款带锁扣的随行杯，放包里不漏。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "duplicate_input",
+        "reason": "名称通常指咖啡馆"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "推荐实体杯子"
+      }
+    },
+    {
+      "sample_id": "synthetic-19",
+      "input": {
+        "name": "剪映",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称通常指应用软件"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "名称通常指应用软件"
+      }
+    },
+    {
+      "sample_id": "synthetic-20",
+      "input": {
+        "name": "剪映",
+        "description": "自动识别字幕很省时间，手机上就能剪。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "名称通常指应用软件"
+      },
+      "full": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "approved",
+        "reason": "推荐软件能力"
+      }
+    },
+    {
+      "sample_id": "synthetic-21",
+      "input": {
+        "name": "剪映",
+        "description": "这是周六线下的剪辑体验课，报名后可以现场做短片。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [
+          "其他"
+        ],
+        "status": "duplicate_input",
+        "reason": "名称通常指应用软件"
+      },
+      "full": {
+        "accepted_categories": [
+          "玩乐"
+        ],
+        "status": "approved",
+        "reason": "推荐线下体验活动"
+      }
+    },
+    {
+      "sample_id": "synthetic-22",
+      "input": {
+        "name": "桂花",
+        "description": null,
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能指食物、植物或使用桂花的商品，单靠名称无法确定"
+      },
+      "full": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能指食物、植物或使用桂花的商品，单靠名称无法确定"
+      }
+    },
+    {
+      "sample_id": "synthetic-23",
+      "input": {
+        "name": "桂花",
+        "description": "店里这杯桂花乌龙茶清香，不会太甜。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能指食物、植物或使用桂花的商品，单靠名称无法确定"
+      },
+      "full": {
+        "accepted_categories": [
+          "美食"
+        ],
+        "status": "approved",
+        "reason": "推荐饮品"
+      }
+    },
+    {
+      "sample_id": "synthetic-24",
+      "input": {
+        "name": "桂花",
+        "description": "这瓶桂花香水喷一泵就够，留香很久。",
+        "image_url": null
+      },
+      "name": {
+        "accepted_categories": [],
+        "status": "needs_context_review",
+        "reason": "可能指食物、植物或使用桂花的商品，单靠名称无法确定"
+      },
+      "full": {
+        "accepted_categories": [
+          "好物"
+        ],
+        "status": "approved",
+        "reason": "推荐实体香水"
+      }
+    }
+  ],
+  "evaluation": {
+    "real_name": {
+      "report": "报告总体命中数/分母、四类单答案命中数/分母、玩乐/其他双答案命中数/分母。双答案样本不重复计入单类分母。",
+      "sample_ids": [
+        "real-16",
+        "real-30",
+        "real-32",
+        "real-33",
+        "real-66",
+        "real-67",
+        "real-69",
+        "real-70",
+        "real-71",
+        "real-72",
+        "real-73",
+        "real-75",
+        "real-78",
+        "real-85",
+        "real-116",
+        "real-118",
+        "real-120",
+        "real-121",
+        "real-122",
+        "real-123",
+        "real-125",
+        "real-126",
+        "real-130",
+        "real-139",
+        "real-141",
+        "real-333",
+        "real-345",
+        "real-347",
+        "real-358",
+        "real-362",
+        "real-367",
+        "real-373",
+        "real-382",
+        "real-409",
+        "real-410",
+        "real-411",
+        "real-413",
+        "real-415",
+        "real-416",
+        "real-418",
+        "real-458",
+        "real-459",
+        "real-460",
+        "real-462",
+        "real-463",
+        "real-464",
+        "real-465",
+        "real-466",
+        "real-750",
+        "real-51",
+        "real-87",
+        "real-89",
+        "real-108",
+        "real-110",
+        "real-111",
+        "real-269",
+        "real-287",
+        "real-291",
+        "real-292",
+        "real-293",
+        "real-294",
+        "real-428",
+        "real-435",
+        "real-498",
+        "real-499",
+        "real-519",
+        "real-521",
+        "real-524",
+        "real-525",
+        "real-100",
+        "real-101",
+        "real-102",
+        "real-103",
+        "real-104",
+        "real-105",
+        "real-106",
+        "real-107",
+        "real-112",
+        "real-113",
+        "real-115",
+        "real-117",
+        "real-119",
+        "real-132",
+        "real-140",
+        "real-145",
+        "real-162",
+        "real-164",
+        "real-173",
+        "real-248",
+        "real-259",
+        "real-265",
+        "real-266",
+        "real-503",
+        "real-505",
+        "real-508",
+        "real-510",
+        "real-516",
+        "real-522",
+        "real-711",
+        "real-713",
+        "real-718",
+        "real-823"
+      ],
+      "mode": "name"
+    },
+    "real_full_without_description_signal": {
+      "sample_ids": [
+        "real-30",
+        "real-32",
+        "real-33",
+        "real-116",
+        "real-118",
+        "real-120",
+        "real-121",
+        "real-122",
+        "real-123",
+        "real-125",
+        "real-126",
+        "real-130",
+        "real-139",
+        "real-141",
+        "real-87",
+        "real-89",
+        "real-269",
+        "real-428",
+        "real-435",
+        "real-100",
+        "real-101",
+        "real-102",
+        "real-103",
+        "real-104",
+        "real-105",
+        "real-106",
+        "real-107",
+        "real-140",
+        "real-248",
+        "real-259",
+        "real-265",
+        "real-266"
+      ],
+      "report": "包含只有名称或描述未补充分辨信息的无图样本，单列结果。",
+      "mode": "full"
+    },
+    "real_full_with_useful_description": {
+      "sample_ids": [
+        "real-524",
+        "real-132",
+        "real-145",
+        "real-162",
+        "real-164",
+        "real-173",
+        "real-388",
+        "real-711",
+        "real-713",
+        "real-718"
+      ],
+      "report": "描述为对象、内容或用途增加可用于分类的信息，未必改变最终标签。单列结果。",
+      "mode": "full"
+    },
+    "real_description_paired": {
+      "report": "同一批编号分别以 Name 与 Full 输入运行，按各自标签判定，报告两次命中数，以及两次都命中、仅 Name 命中、仅 Full 命中、两次都未命中四格计数。预期标签有变化时单列编号和实际输出。该小样本用于诊断。",
+      "sample_ids": [
+        "real-524",
+        "real-132",
+        "real-145",
+        "real-162",
+        "real-164",
+        "real-173",
+        "real-711",
+        "real-713",
+        "real-718"
+      ],
+      "modes": [
+        "name",
+        "full"
+      ]
+    },
+    "real_full_with_images": {
+      "pending_sample_ids": [
+        "real-16",
+        "real-66",
+        "real-67",
+        "real-69",
+        "real-70",
+        "real-71",
+        "real-72",
+        "real-73",
+        "real-74",
+        "real-75",
+        "real-78",
+        "real-85",
+        "real-333",
+        "real-345",
+        "real-347",
+        "real-358",
+        "real-362",
+        "real-366",
+        "real-367",
+        "real-373",
+        "real-382",
+        "real-409",
+        "real-410",
+        "real-411",
+        "real-413",
+        "real-415",
+        "real-416",
+        "real-418",
+        "real-458",
+        "real-459",
+        "real-460",
+        "real-462",
+        "real-463",
+        "real-464",
+        "real-465",
+        "real-466",
+        "real-722",
+        "real-724",
+        "real-750",
+        "real-51",
+        "real-108",
+        "real-110",
+        "real-111",
+        "real-287",
+        "real-291",
+        "real-292",
+        "real-293",
+        "real-294",
+        "real-498",
+        "real-499",
+        "real-519",
+        "real-521",
+        "real-112",
+        "real-113",
+        "real-115",
+        "real-117",
+        "real-119",
+        "real-29",
+        "real-40",
+        "real-503",
+        "real-505",
+        "real-508",
+        "real-510",
+        "real-516",
+        "real-522",
+        "real-823"
+      ],
+      "report": "图片评测待原图核验。若图片失效，维持挂起，勿在有图组用缺图结果替代。当前真实无图 Full 缺少好物。",
+      "sample_ids": [],
+      "mode": "full"
+    },
+    "synthetic_contrast": {
+      "report": "以组为单位报告两条描述变体是否都命中，并报告每个有标准答案的名称基线。桂花名称只记录预测。两条变体同时正确才算通过一组。",
+      "groups": [
+        {
+          "name": "城市书房",
+          "name_sample_id": "synthetic-07",
+          "name_scoreable": true,
+          "description_sample_ids": [
+            "synthetic-08",
+            "synthetic-09"
+          ]
+        },
+        {
+          "name": "桂花",
+          "name_sample_id": "synthetic-22",
+          "name_scoreable": false,
+          "description_sample_ids": [
+            "synthetic-23",
+            "synthetic-24"
+          ]
+        },
+        {
+          "name": "合生汇",
+          "name_sample_id": "synthetic-01",
+          "name_scoreable": true,
+          "description_sample_ids": [
+            "synthetic-02",
+            "synthetic-03"
+          ]
+        },
+        {
+          "name": "剪映",
+          "name_sample_id": "synthetic-19",
+          "name_scoreable": true,
+          "description_sample_ids": [
+            "synthetic-20",
+            "synthetic-21"
+          ]
+        },
+        {
+          "name": "手作体验馆",
+          "name_sample_id": "synthetic-10",
+          "name_scoreable": true,
+          "description_sample_ids": [
+            "synthetic-11",
+            "synthetic-12"
+          ]
+        },
+        {
+          "name": "万象城",
+          "name_sample_id": "synthetic-04",
+          "name_scoreable": true,
+          "description_sample_ids": [
+            "synthetic-05",
+            "synthetic-06"
+          ]
+        },
+        {
+          "name": "星巴克",
+          "name_sample_id": "synthetic-16",
+          "name_scoreable": true,
+          "description_sample_ids": [
+            "synthetic-17",
+            "synthetic-18"
+          ]
+        },
+        {
+          "name": "寻梦环游记",
+          "name_sample_id": "synthetic-13",
+          "name_scoreable": true,
+          "description_sample_ids": [
+            "synthetic-14",
+            "synthetic-15"
+          ]
+        }
+      ],
+      "modes": [
+        "name",
+        "full"
+      ]
+    },
+    "comparison": "两版使用同一版本、相同模式、样本编号及输入字段。本轮不向任一方案额外提供地点 [POI]；上线若使用该字段，应另测。",
+    "acceptance": "80% 是技术提出的参考值，本轮只展示各有效组的命中数与分母，不据此判定四类 Full、有图能力或上线验收。用于调参后，从不同榜单留出未参与调参的独立验收样本，覆盖四类、有效描述与有图输入。"
+  }
+}
